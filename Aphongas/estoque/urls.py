@@ -12,5 +12,7 @@ urlpatterns = [
     path('produtos/novo/', views.cadastrar_produto, name='cadastrar_produto'),
     
     path('movimentacao/novo/', views.cadastrar_movimentacao, name='cadastrar_movimentacao'),
+    path('movimentacao/', views.lista_movimentacoes, name='lista_movimentacoes'),
 
+    path('relatorio/estoque/', views.relatorio_estoque, name='relatorio_estoque'),
 ]

@@ -7,6 +7,9 @@ from .forms import ProdutoForm
 from django.contrib import messages
 from .models import Movimentacao, Produto
 from .forms import MovimentacaoForm
+from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
+from .models import Produto, Movimentacao
 
 @login_required
 def lista_depositos(request):
@@ -82,5 +85,30 @@ def cadastrar_movimentacao(request):
         form = MovimentacaoForm()
 
     return render(request, 'movimentacao/cadastro.html', {'form': form})
+
+@login_required
+def relatorio_estoque(request):
+    produtos = Produto.objects.all()
+    dados_estoque = []
+
+    for produto in produtos:
+        entradas = Movimentacao.objects.filter(produto=produto, tipo='E').aggregate(Sum('quantidade'))['quantidade__sum'] or 0
+        saidas = Movimentacao.objects.filter(produto=produto, tipo='S').aggregate(Sum('quantidade'))['quantidade__sum'] or 0
+        saldo = entradas - saidas
+
+        dados_estoque.append({
+            'produto': produto,
+            'entradas': entradas,
+            'saidas': saidas,
+            'saldo': saldo
+        })
+
+    return render(request, 'relatorio/estoque.html', {'dados_estoque': dados_estoque})
+
+@login_required
+def lista_movimentacoes(request):
+    movimentacoes = Movimentacao.objects.all()
+    return render(request, 'movimentacao/lista.html', {'movimentacoes': movimentacoes})
+
 
 
