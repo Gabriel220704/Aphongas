@@ -33,15 +33,6 @@ class Produto(models.Model):
     def __str__(self):
         return self.descricao
 
-class Produto(models.Model):
-    
-    descricao = models.CharField(max_length=100)
-    unidade = models.CharField(max_length=10)
-    id_fornecedor = models.ForeignKey('Fornecedor', on_delete=models.CASCADE)
-    id_deposito_padrao = models.ForeignKey('Deposito', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.descricao
 
 class Movimentacao(models.Model):
     TIPOS = [

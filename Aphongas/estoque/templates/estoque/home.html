@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Bem-vindo ao Aphongas</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <a href="{% url 'lista_produtos' %}" class="btn btn-outline-primary w-100">Produtos</a>
+        </div>
+        <div class="col">
+            <a href="{% url 'lista_fornecedores' %}" class="btn btn-outline-primary w-100">Fornecedores</a>
+        </div>
+        <div class="col">
+            <a href="{% url 'lista_depositos' %}" class="btn btn-outline-primary w-100">Depósitos</a>
+        </div>
+        <div class="col">
+            <a href="{% url 'movimentar_produto' %}" class="btn btn-outline-primary w-100">Movimentações</a>
+        </div>
+        <div class="col">
+            <a href="{% url 'relatorio_estoque' %}" class="btn btn-outline-primary w-100">Relatório de Estoque</a>
+        </div>
+        {% if request.user.is_superuser %}
+        <div class="col">
+            <a href="{% url 'lista_usuarios' %}" class="btn btn-outline-danger w-100">Usuários</a>
+        </div>
+        {% endif %}
+        <div class="col">
+            <a href="{% url 'logout' %}" class="btn btn-outline-secondary w-100">Sair</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

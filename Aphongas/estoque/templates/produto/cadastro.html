@@ -1,9 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Cadastrar Produto</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Salvar</button>
-  </form>
+<div class="container mt-4">
+    <h2>Cadastrar Produto</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <input type="text" class="form-control" id="descricao" name="descricao" required>
+        </div>
+        <div class="mb-3">
+            <label for="unidade" class="form-label">Unidade</label>
+            <select class="form-select" id="unidade" name="unidade" required>
+                {% for codigo, nome in unidades %}
+                    <option value="{{ codigo }}">{{ nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="fornecedor" class="form-label">Fornecedor</label>
+            <select class="form-select" id="fornecedor" name="fornecedor" required>
+                {% for fornecedor in fornecedores %}
+                    <option value="{{ fornecedor.id }}">{{ fornecedor.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="deposito" class="form-label">Depósito Padrão</label>
+            <select class="form-select" id="deposito" name="deposito" required>
+                {% for deposito in depositos %}
+                    <option value="{{ deposito.id }}">{{ deposito.descricao }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
 {% endblock %}
+

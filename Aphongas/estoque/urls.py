@@ -15,4 +15,20 @@ urlpatterns = [
     path('movimentacao/', views.lista_movimentacoes, name='lista_movimentacoes'),
 
     path('relatorio/estoque/', views.relatorio_estoque, name='relatorio_estoque'),
+
+    path('usuarios/', views.lista_usuarios, name='lista_usuarios'),
+    path('usuarios/novo/', views.cadastrar_usuario, name='cadastrar_usuario'),
+
+    path('produtos/novo/', views.cadastrar_produto, name='cadastrar_produto'),
+    path('produtos/', views.lista_produtos, name='lista_produtos'),
+
+    path('movimentacoes/', views.lista_movimentacoes, name='lista_movimentacoes'),
+    path('movimentacoes/nova/', views.cadastrar_movimentacao, name='cadastrar_movimentacao'),
+    
+    path('relatorio/', views.relatorio_movimentacoes, name='relatorio_movimentacoes'),
+
+    path('', views.home, name='home'),
+    path('movimentar/', views.movimentar_produto, name='movimentar_produto'),
+
 ]
+
