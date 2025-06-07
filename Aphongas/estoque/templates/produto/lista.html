@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Produtos</h2>
+  <a href="{% url 'cadastrar_produto' %}" class="btn btn-primary">Novo Produto</a>
+  <ul class="mt-3">
+    {% for p in produtos %}
+      <li>{{ p.descricao }} ({{ p.unidade }}) - Fornecedor: {{ p.id_fornecedor.nome }} - Depósito padrão: {{ p.id_deposito_padrao.descricao }}</li>
+    {% empty %}
+      <li>Nenhum produto cadastrado.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

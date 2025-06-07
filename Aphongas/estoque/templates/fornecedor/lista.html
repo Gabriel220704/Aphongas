@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Fornecedores</h2>
+  <a href="{% url 'cadastrar_fornecedor' %}" class="btn btn-primary">Novo fornecedor</a>
+  <ul class="mt-3">
+    {% for f in fornecedores %}
+      <li>{{ f.nome }} - {{ f.telefone }} - {{ f.endereco }} - Responsável: {{ f.responsavel }}</li>
+    {% empty %}
+      <li>Nenhum fornecedor cadastrado.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
