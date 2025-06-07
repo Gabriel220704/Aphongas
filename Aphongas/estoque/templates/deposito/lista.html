@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Depósitos</h2>
+  <a href="{% url 'cadastrar_deposito' %}" class="btn btn-primary">Novo depósito</a>
+  <ul class="mt-3">
+    {% for d in depositos %}
+      <li>{{ d.descricao }} - {{ d.endereco }}</li>
+    {% empty %}
+      <li>Nenhum depósito cadastrado.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
